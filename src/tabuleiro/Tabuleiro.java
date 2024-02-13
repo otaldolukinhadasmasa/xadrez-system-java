@@ -27,5 +27,11 @@ public class Tabuleiro {
         this.columns = columns;
     }
 
-    
+    public Peca peca(int row, int column){
+        return pecas[row][column];
+    }
+
+    public Peca peca(Posicao posicao){
+        return pecas[posicao.getRow()][posicao.getColumn()];
+    }
 }
