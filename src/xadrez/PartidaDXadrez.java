@@ -2,6 +2,7 @@ package xadrez;
 
 import pecasdxadrez.Rei;
 import pecasdxadrez.Torre;
+import tabuleiro.Peca;
 import tabuleiro.Posicao;
 import tabuleiro.Tabuleiro;
 
@@ -24,8 +25,32 @@ public class PartidaDXadrez {
         return mat;
     }
     
+    public PecaDXadrez performMoveDXadrez(PosicaoXadrez sourcePosicao, PosicaoXadrez targetPosicao){
+        Posicao source = sourcePosicao.toPosicao();
+        Posicao target = targetPosicao.toPosicao();
+        validacaoSourcePosicao(source);
+        Peca pecaCapturada = makeMove(source, target);
+        return (PecaDXadrez)pecaCapturada;
+    }
+
+    private Peca makeMove(Posicao source, Posicao target){
+        Peca p = tabuleiro.removePeca(source);
+        Peca pecaCapturada = tabuleiro.removePeca(target);
+        tabuleiro.placePeca(p, target);
+        return pecaCapturada;
+    }
+    
+    private void validacaoSourcePosicao(Posicao posicao){
+        if(tabuleiro.thereIsPeca(posicao)){
+            throw new ExcecaoDXadrez("Nao ha uma peca na posicao de origem");
+        }
+    }
+
+    private void placeNovaPeca(char column, int row, PecaDXadrez peca) {
+        tabuleiro.placePeca(peca, new PosicaoXadrez(column, row).toPosicao());
+    }
+
     private void setupInicial(){
-        placeNovaPeca('b', 6, new Torre(tabuleiro, Color.WHITE));
 		placeNovaPeca('c', 1, new Torre(tabuleiro, Color.WHITE));
         placeNovaPeca('c', 2, new Torre(tabuleiro, Color.WHITE));
         placeNovaPeca('d', 2, new Torre(tabuleiro, Color.WHITE));
@@ -40,9 +65,5 @@ public class PartidaDXadrez {
         placeNovaPeca('e', 8, new Torre(tabuleiro, Color.BLACK));
         placeNovaPeca('d', 8, new Rei(tabuleiro, Color.BLACK));
 	}
-
-    private void placeNovaPeca(char column, int row, PecaDXadrez peca) {
-        tabuleiro.placePeca(peca, new PosicaoXadrez(column, row).toPosicao());
-    }
 
 }
