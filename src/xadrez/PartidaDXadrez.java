@@ -26,9 +26,20 @@ public class PartidaDXadrez {
     
     private void setupInicial(){
         placeNovaPeca('b', 6, new Torre(tabuleiro, Color.WHITE));
-        placeNovaPeca('e', 8, new Rei(tabuleiro, Color.BLACK));
-        placeNovaPeca('e', 1, new Rei(tabuleiro, Color.WHITE));
-    }
+		placeNovaPeca('c', 1, new Torre(tabuleiro, Color.WHITE));
+        placeNovaPeca('c', 2, new Torre(tabuleiro, Color.WHITE));
+        placeNovaPeca('d', 2, new Torre(tabuleiro, Color.WHITE));
+        placeNovaPeca('e', 2, new Torre(tabuleiro, Color.WHITE));
+        placeNovaPeca('e', 1, new Torre(tabuleiro, Color.WHITE));
+        placeNovaPeca('d', 1, new Rei(tabuleiro, Color.WHITE)); 
+
+        placeNovaPeca('c', 7, new Torre(tabuleiro, Color.BLACK));
+        placeNovaPeca('c', 8, new Torre(tabuleiro, Color.BLACK));
+        placeNovaPeca('d', 7, new Torre(tabuleiro, Color.BLACK));
+        placeNovaPeca('e', 7, new Torre(tabuleiro, Color.BLACK));
+        placeNovaPeca('e', 8, new Torre(tabuleiro, Color.BLACK));
+        placeNovaPeca('d', 8, new Rei(tabuleiro, Color.BLACK));
+	}
 
     private void placeNovaPeca(char column, int row, PecaDXadrez peca) {
         tabuleiro.placePeca(peca, new PosicaoXadrez(column, row).toPosicao());
