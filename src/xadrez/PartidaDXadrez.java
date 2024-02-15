@@ -41,7 +41,7 @@ public class PartidaDXadrez {
     }
     
     private void validacaoSourcePosicao(Posicao posicao){
-        if(tabuleiro.thereIsPeca(posicao)){
+        if(!tabuleiro.thereIsPeca(posicao)){
             throw new ExcecaoDXadrez("Nao ha uma peca na posicao de origem");
         }
     }
