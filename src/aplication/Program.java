@@ -24,7 +24,7 @@ public class Program{
             System.out.println("Destino");
             PosicaoXadrez target = UI.readPosicaoXadrez(sc);
 
-            PecaDXadrez pecaCapturada = PartidaDXadrez.performMoveDXadrez(source, target);
+            PecaDXadrez pecaCapturada = partidaDXadrez.performMoveDXadrez(source, target);
         }
     }
 }
