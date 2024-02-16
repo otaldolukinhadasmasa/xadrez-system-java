@@ -10,10 +10,14 @@ import tabuleiro.Tabuleiro;
 
 public class PartidaDXadrez {
     
+    private int turn;
+    private Color currentPlayer;
     private Tabuleiro tabuleiro;
     
     public PartidaDXadrez(){
         tabuleiro = new Tabuleiro(8, 8);
+        turn = 1;
+        currentPlayer = Color.WHITE;
         setupInicial();
     }
 
@@ -25,6 +29,14 @@ public class PartidaDXadrez {
             }
         }
         return mat;
+    }
+    
+    public int getTurn(){
+        return turn;
+    }
+
+    public Color getCurrentPlayer(){
+        return currentPlayer;
     }
     
     public boolean[][] posiveisMove(PosicaoXadrez sourcePosicao){
@@ -39,6 +51,7 @@ public class PartidaDXadrez {
         validacaoSourcePosicao(source);
         validacaoTargetPosicao(source, target);
         Peca pecaCapturada = makeMove(source, target);
+        nextTurn();
         return (PecaDXadrez)pecaCapturada;
     }
 
@@ -53,6 +66,9 @@ public class PartidaDXadrez {
         if(!tabuleiro.thereIsPeca(posicao)){
             throw new ExcecaoDXadrez("Nao ha uma peca na posicao de origem");
         }
+        if (currentPlayer != ((PecaDXadrez)tabuleiro.peca(posicao)).getColor()) {
+            throw new ExcecaoDXadrez("A peca escolhida nao e sua!");
+        }
         if (!tabuleiro.peca(posicao).isMovimentoPosivel()) {
             throw new ExcecaoDXadrez("Nao existe movimentos possiveis para a peca escolhida");
         }
@@ -63,6 +79,11 @@ public class PartidaDXadrez {
             throw new ExcecaoDXadrez("A peca escolhida nao pode se mover para a cposicao escolhida.");
         }
     }
+
+private void nextTurn(){
+    turn++;
+    currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
+}
 
     private void placeNovaPeca(char column, int row, PecaDXadrez peca) {
         tabuleiro.placePeca(peca, new PosicaoXadrez(column, row).toPosicao());

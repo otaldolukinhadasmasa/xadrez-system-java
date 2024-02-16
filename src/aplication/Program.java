@@ -19,7 +19,7 @@ public class Program{
         while (true) {
             try{
                 UI.clearScreen();
-                UI.printTabuleiro(partidaDXadrez.getPecas());
+                UI.printPartida(partidaDXadrez);
                 System.out.println();
                 System.out.println("Escolhe essa bosta");
                 PosicaoXadrez source = UI.readPosicaoXadrez(sc);
