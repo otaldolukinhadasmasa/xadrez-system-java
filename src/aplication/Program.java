@@ -24,6 +24,9 @@ public class Program{
                 System.out.println("Escolhe essa bosta");
                 PosicaoXadrez source = UI.readPosicaoXadrez(sc);
 
+                boolean[][] possiveisMoves = partidaDXadrez.posiveisMove(source);
+                UI.clearScreen();
+                UI.printTabuleiro(partidaDXadrez.getPecas(), possiveisMoves);
                 System.out.println();
                 System.out.println("Destino");
                 PosicaoXadrez target = UI.readPosicaoXadrez(sc);

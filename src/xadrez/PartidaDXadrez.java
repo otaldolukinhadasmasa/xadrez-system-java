@@ -1,5 +1,7 @@
 package xadrez;
 
+import javax.swing.text.Position;
+
 import pecasdxadrez.Rei;
 import pecasdxadrez.Torre;
 import tabuleiro.Peca;
@@ -25,6 +27,12 @@ public class PartidaDXadrez {
         return mat;
     }
     
+    public boolean[][] posiveisMove(PosicaoXadrez sourcePosicao){
+        Posicao posicao = sourcePosicao.toPosicao();
+        validacaoSourcePosicao(posicao);
+        return tabuleiro.peca(posicao).posiveisMoves();
+    }
+
     public PecaDXadrez performMoveDXadrez(PosicaoXadrez sourcePosicao, PosicaoXadrez targetPosicao){
         Posicao source = sourcePosicao.toPosicao();
         Posicao target = targetPosicao.toPosicao();
