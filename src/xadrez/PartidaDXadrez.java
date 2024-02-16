@@ -1,5 +1,8 @@
 package xadrez;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.text.Position;
 
 import pecasdxadrez.Rei;
@@ -14,6 +17,9 @@ public class PartidaDXadrez {
     private Color currentPlayer;
     private Tabuleiro tabuleiro;
     
+    private List<Peca> pecasNoTabuleiro = new ArrayList<>();
+    private List<Peca> pecasCapturadas = new ArrayList<>();
+
     public PartidaDXadrez(){
         tabuleiro = new Tabuleiro(8, 8);
         turn = 1;
@@ -59,6 +65,11 @@ public class PartidaDXadrez {
         Peca p = tabuleiro.removePeca(source);
         Peca pecaCapturada = tabuleiro.removePeca(target);
         tabuleiro.placePeca(p, target);
+
+        if (pecaCapturada != null) {
+            pecasNoTabuleiro.remove(pecaCapturada);
+            pecasCapturadas.add(pecaCapturada);
+        }
         return pecaCapturada;
     }
     
@@ -87,6 +98,7 @@ private void nextTurn(){
 
     private void placeNovaPeca(char column, int row, PecaDXadrez peca) {
         tabuleiro.placePeca(peca, new PosicaoXadrez(column, row).toPosicao());
+        pecasNoTabuleiro.add(peca);
     }
 
     private void setupInicial(){
